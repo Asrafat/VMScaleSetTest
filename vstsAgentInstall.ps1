@@ -69,7 +69,7 @@ function Test-Parameters
     [CmdletBinding()]
     param(
         [string] $VstsAccount,
-        [string] $WorkDirectory
+       # [string] $WorkDirectory
     )
     
     if ($VstsAccount -match "https*://" -or $VstsAccount -match "visualstudio.com")
@@ -77,10 +77,10 @@ function Test-Parameters
         Write-Error "VSTS account '$VstsAccount' should not be the URL, just the account name."
     }
 
-    if (![string]::IsNullOrWhiteSpace($WorkDirectory) -and !(Test-ValidPath -Path $WorkDirectory))
-    {
-        Write-Error "Work directory '$WorkDirectory' is not a valid path."
-    }
+    #if (![string]::IsNullOrWhiteSpace($WorkDirectory) -and !(Test-ValidPath -Path $WorkDirectory))
+    #{
+    #    Write-Error "Work directory '$WorkDirectory' is not a valid path."
+   # }
 }
 
 function Test-ValidPath
@@ -289,8 +289,8 @@ try
     $workingDirectory = Get-Location
     $poolName = "AzureStreamAnalytics Service Pool"
     Write-Host 'Validating parameters'
-    Test-Parameters -VstsAccount $vstsAccount -WorkDirectory $workDirectory
-
+    Test-Parameters -VstsAccount $vstsAccount
+    
     Write-Host 'Preparing agent installation location'
     $agentInstallPath = New-AgentInstallPath
 
