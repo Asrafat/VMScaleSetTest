@@ -2,7 +2,7 @@
 md \agent;
 cd \agent;
 $cwd = Get-Location;
-#md \vstsagent.zip
+md \vstsagent.zip
 
 #$destinationFolder = Join-Path -Path $cwd -ChildPath "\vstsAgent.zip"
 New-Item -ItemType Directory -Force -Path $destinationFolder | Out-Null
