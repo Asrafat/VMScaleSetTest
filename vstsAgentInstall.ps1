@@ -1,15 +1,35 @@
-#﻿# Downloads the Visual Studio Online Build Agent, installs on the new machine, registers with the Visual
+# Downloads the Visual Studio Online Build Agent, installs on the new machine, registers with the Visual
 # Studio Online account, and adds to the specified build agent pool
 #
 # Main execution block.
 #
 try
 {   
+
+    md \agent
+    cd \agent
+    $agentInstallDir = Get-Location
+    [string] $agentInstallPath = $null
+    
+    # Construct the agent folder under the specified drive.
+    #$agentInstallDir = $DriveLetter + ":"
+    try
+    {
+        # Create the directory for this agent.
+        $agentInstallPath = Join-Path -Path $agentInstallDir -ChildPath "\vstsAgent.zip"
+        New-Item -ItemType Directory -Force -Path $agentInstallPath | Out-Null
+    }
+    catch
+    {
+        $agentInstallPath = $null
+        Write-Error "Failed to create the agent directory at $installPathDir."
+    }
+    
     Write-Host 'Validating parameters'
     #Test-Parameters -VstsAccount $vstsAccount
     
     Write-Host 'Preparing agent installation location'
-    $agentInstallPath = New-AgentInstallPath
+    #$agentInstallPath = New-AgentInstallPath
 
     Write-Host 'Checking for previously configured agent'
     #Test-AgentExists -InstallPath $agentInstallPath -AgentName $agentName
@@ -86,11 +106,7 @@ function Download-AgentPackage
 
 function New-AgentInstallPath
 {
-    #[CmdletBinding()]
-    #param(
-    #    [string] $DriveLetter,
-      #  [string] $AgentName
-   # )
+   
     md \agent
     cd \agent
     $agentInstallDir = Get-Location
@@ -141,5 +157,3 @@ function Extract-AgentPackage
     [System.IO.Compression.ZipFile]::ExtractToDirectory("$PackagePath", "$Destination")
     
 }
-
-
