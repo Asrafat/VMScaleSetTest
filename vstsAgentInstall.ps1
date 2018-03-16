@@ -1,8 +1,3 @@
-# Downloads the Visual Studio Online Build Agent, installs on the new machine, registers with the Visual
-# Studio Online account, and adds to the specified build agent pool
-#
-# Main execution block.
-#
 try
 {   
 
@@ -21,29 +16,9 @@ try
     }
     catch
     {
-        $agentInstallPath = $null
-        Write-Error "Failed to create the agent directory at $installPathDir."
-    }
-    
-    Write-Host 'Validating parameters'
-    #Test-Parameters -VstsAccount $vstsAccount
-    
-    Write-Host 'Preparing agent installation location'
-    #$agentInstallPath = New-AgentInstallPath
-
-    Write-Host 'Checking for previously configured agent'
-    #Test-AgentExists -InstallPath $agentInstallPath -AgentName $agentName
-
-    Write-Host 'Downloading agent package'
-    #$agentPackagePath = Download-AgentPackage -VstsAccount $vstsAccount -VstsUserPassword $vstsUserPassword
-
-    Write-Host 'Extracting agent package contents'
-    #Extract-AgentPackage -PackagePath $agentPackagePath -Destination $agentInstallPath
-
-    Write-Host 'Getting agent installer path'
-    #$agentExePath = Get-AgentInstaller -InstallPath $agentInstallPath
+        $agentInstallPath = $null       
+    }    
    
-    Write-Host 'Done'
 }
 finally
 {
