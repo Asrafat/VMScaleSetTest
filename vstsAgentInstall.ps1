@@ -265,7 +265,7 @@ function Install-Agent
 }
 
 ###################################################################################################
-
+#
 #
 # Handle all errors in this script.
 #
@@ -289,7 +289,7 @@ try
     $workingDirectory = Get-Location
     $poolName = "AzureStreamAnalytics Service Pool"
     Write-Host 'Validating parameters'
-    Test-Parameters -VstsAccount $vstsAccount
+    #Test-Parameters -VstsAccount $vstsAccount
     
     Write-Host 'Preparing agent installation location'
     $agentInstallPath = New-AgentInstallPath
